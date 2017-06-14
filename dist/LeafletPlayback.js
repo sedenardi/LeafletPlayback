@@ -947,6 +947,7 @@ L.Playback = L.Playback.Clock.extend({
             dateControl: false,
             sliderControl: false,
             showTracksByDefault: false,
+            setMarkerAtStart: true,
 
             // options
             layer: {
@@ -969,7 +970,7 @@ L.Playback = L.Playback.Clock.extend({
                 this._tracksLayer = new L.Playback.TracksLayer(map, options);
             }
 
-            this.setData(geoJSON);
+            this.setData(geoJSON, this.options.setMarkerAtStart);
 
 
             if (this.options.playControl) {
@@ -997,12 +998,18 @@ L.Playback = L.Playback.Clock.extend({
             }
         },
 
-        setData : function (geoJSON) {
+        setData : function (geoJSON, setMarkerAtStart) {
             this.clearData();
 
             this.addData(geoJSON, this.getTime());
 
-            this.setCursor(this.getStartTime());
+            if (!setMarkerAtStart) {
+                this.setCursor(this.getEndTime());
+            } else {
+                this.setCursor(this.getStartTime());                
+            }
+
+            
         },
 
         // bad implementation

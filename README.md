@@ -80,6 +80,8 @@ var playback = new L.Playback(map, geoJSON, onPlaybackTimeChange, options);
 
 * `showTracksByDefault` - Set `true` if you want to show gps tracks by default. **Default: `false`**.
 
+* `setMarkerAtStart` - Set `false` if you want the map marker to start at end of track. **Default: `true`**.
+
 * `playControl` - Set `true` if play button is needed. **Default: `false`**.
 
 * `dateControl` - Set `true` if date label is needed. **Default: `false`**.
