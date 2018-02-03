@@ -18,15 +18,15 @@ L.Playback.Clock = L.Class.extend({
       clearInterval(self._intervalID);
       return;
     }
-    self._trackController.tock(self._cursor, self._transitionTime);
-    self._callbacks(self._cursor);
+    var trackIndices = self._trackController.tock(self._cursor, self._transitionTime);
+    self._callbacks(self._cursor, trackIndices);
     self._cursor += self._tickLen;
   },
 
-  _callbacks: function(cursor) {
+  _callbacks: function(cursor, trackIndices) {
     var arry = this._callbacksArry;
     for (var i=0, len=arry.length; i<len; i++) {
-      arry[i](cursor);
+      arry[i](cursor, trackIndices);
     }
   },
 
@@ -37,8 +37,8 @@ L.Playback.Clock = L.Class.extend({
   start: function () {
     if (this._intervalID) return;
     this._intervalID = window.setInterval(
-      this._tick, 
-      this._transitionTime, 
+      this._tick,
+      this._transitionTime,
       this);
   },
 
@@ -73,8 +73,8 @@ L.Playback.Clock = L.Class.extend({
       time += this._tickLen - mod;
     }
     this._cursor = time;
-    this._trackController.tock(this._cursor, 0);
-    this._callbacks(this._cursor);
+    var trackIndices = this._trackController.tock(this._cursor, 0);
+    this._callbacks(this._cursor, trackIndices);
   },
 
   getTime: function() {
