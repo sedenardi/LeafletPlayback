@@ -64,7 +64,7 @@ var playback = new L.Playback(map, geoJSON, onPlaybackTimeChange, options);
 
 * `geoJSON` - GeoJSON object or an array of GeoJSON objects. Pass `null` if you don't have any data yet. **Required**.
 
-* `onPlaybackTimeChange` - A function with signature `(timestamp)` that will send the `timestamp` value on each tick. **Required**.
+* `onPlaybackTimeChange` - A function with signature `(timestamp, trackIndices)` that will send the `timestamp` value on each tick, as well as an array `trackIndices` of the original coord index used for the currently displayed track. **Required**.
 
 * `options` - An options object. **Optional**.
 
@@ -134,4 +134,3 @@ Convert `gpxString` content into geoJSON that can be  used as input data for `Pl
 * @lbuter - Luke Butler
 * @dgorissen - Dirk Gorissen
 * @apre
-
