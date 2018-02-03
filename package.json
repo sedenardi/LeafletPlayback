@@ -3,13 +3,14 @@
   "version": "0.2.3",
   "author": "Nicholas Hallahan <nick@theoutpost.io>",
   "contributors": [
-    "Marius Bieliauskas <@recallfx>"
+    "Marius Bieliauskas <@recallfx>",
+    "Sanders DeNardi <@sedenardi>"
   ],
   "description": "This is a Leaflet plug-in that plays back points that have a time stamp synchronized to a clock.",
   "homepage": "http://leafletplayback.theoutpost.io/",
   "repository": {
     "type": "git",
-    "url": "git@github.com:hallahan/LeafletPlayback.git"
+    "url": "git@github.com:sedenardi/LeafletPlayback.git"
   },
   "main": "dist/LeafletPlayback.js",
   "dependencies": {
