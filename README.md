@@ -106,6 +106,8 @@ var playback = new L.Playback(map, geoJSON, onPlaybackTimeChange, options);
 
 * `fadeMarkersWhenStale` - Set `true` markers should hide when not yet present in time and fade out after staleTime has passed **Default: `false`**.
 
+* `hideMarkerWhenStale` - Set `true` markers should hide when not yet present in time and hide after staleTime has passed (overrides `fadeMarkersWhenStale`) **Default: `false`**.
+
 ### playback#setData(geoJSON)
 
 Reset current data and add new.

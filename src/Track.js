@@ -9,7 +9,7 @@ L.Playback.Track = L.Class.extend({
             var tickLen = options.tickLen || 250;
             this._staleTime = options.staleTime || 60*60*1000;
             this._fadeMarkersWhenStale = options.fadeMarkersWhenStale || false;
-
+            this._hideMarkerWhenStale = options.hideMarkerWhenStale || false;
             this._geoJSON = geoJSON;
             this._tickLen = tickLen;
             this._ticks = [];
@@ -153,7 +153,7 @@ L.Playback.Track = L.Class.extend({
         _directionOfPoint:function(start,end){
             return this._getBearing(start[1],start[0],end[1],end[0]);
         },
-        
+
         _getBearing:function(startLat,startLong,endLat,endLong){
               startLat = this._radians(startLat);
               startLong = this._radians(startLong);
@@ -269,7 +269,7 @@ L.Playback.Track = L.Class.extend({
                 }
 
 				//hide the marker if its not present yet and fadeMarkersWhenStale is true
-				if(this._fadeMarkersWhenStale && !this.trackPresentAtTick(timestamp))
+				if((this._fadeMarkersWhenStale || this._hideMarkerWhenStale) && !this.trackPresentAtTick(timestamp))
 				{
 					this._marker.setOpacity(0);
 				}
@@ -280,7 +280,7 @@ L.Playback.Track = L.Class.extend({
 
         moveMarker : function(latLng, transitionTime,timestamp) {
             if (this._marker) {
-                if(this._fadeMarkersWhenStale) {
+                if(this._fadeMarkersWhenStale || this._hideMarkerWhenStale) {
                     //show the marker if its now present
                     if(this.trackPresentAtTick(timestamp)) {
                         this._marker.setOpacity(1);
@@ -289,7 +289,7 @@ L.Playback.Track = L.Class.extend({
                     }
 
                     if(this.trackStaleAtTick(timestamp)) {
-                        this._marker.setOpacity(0.25);
+                        this._marker.setOpacity(this._hideMarkerWhenStale ? 0 : 0.25);
                     }
                 }
 
