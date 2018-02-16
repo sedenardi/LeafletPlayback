@@ -831,7 +831,7 @@ L.Playback.DateControl = L.Control.extend({
         return this._container;
     }
 });
-    
+
 L.Playback.PlayControl = L.Control.extend({
     options : {
         position : 'bottomright'
@@ -863,22 +863,28 @@ L.Playback.PlayControl = L.Control.extend({
         .on(this._button, 'dblclick', stop)
         .on(this._button, 'click', L.DomEvent.preventDefault)
         .on(this._button, 'click', play, this);
-        
+
         function play(){
             if (playback.isPlaying()) {
                 playback.stop();
                 self._button.innerHTML = 'Play';
+                if (this.playback.onStop) {
+                  this.playback.onStop();
+                }
             }
             else {
                 playback.start();
                 self._button.innerHTML = 'Stop';
-            }                
+                if (this.playback.onStart) {
+                  this.playback.onStart();
+                }
+            }
         }
 
         return this._container;
     }
-});    
-    
+});
+
 L.Playback.SliderControl = L.Control.extend({
     options : {
         position : 'bottomleft'
@@ -910,7 +916,7 @@ L.Playback.SliderControl = L.Control.extend({
         .on(this._slider, 'click', L.DomEvent.preventDefault)
         //.on(this._slider, 'mousemove', L.DomEvent.preventDefault)
         .on(this._slider, 'change', onSliderChange, this)
-        .on(this._slider, 'mousemove', onSliderChange, this);           
+        .on(this._slider, 'mousemove', onSliderChange, this);
 
 
         function onSliderChange(e) {
@@ -921,8 +927,8 @@ L.Playback.SliderControl = L.Control.extend({
         playback.addCallback(function (ms) {
             self._slider.value = ms;
         });
-        
-        
+
+
         map.on('playback:add_tracks', function() {
             self._slider.min = playback.getStartTime();
             self._slider.max = playback.getEndTime();
@@ -931,7 +937,8 @@ L.Playback.SliderControl = L.Control.extend({
 
         return this._container;
     }
-});      
+});
+
 
 L.Playback = L.Playback.Clock.extend({
         statics : {

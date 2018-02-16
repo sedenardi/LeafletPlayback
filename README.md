@@ -84,6 +84,10 @@ var playback = new L.Playback(map, geoJSON, onPlaybackTimeChange, options);
 
 * `playControl` - Set `true` if play button is needed. **Default: `false`**.
 
+* `onStart` - Function fired when optional `playControl` play is clicked. **Optional**.
+
+* `onStop` - Function fired when optional `playControl` stop is clicked. **Optional**.
+
 * `dateControl` - Set `true` if date label is needed. **Default: `false`**.
 
 * `sliderControl` - Set `true` if slider control is needed. **Default: `false`**.
