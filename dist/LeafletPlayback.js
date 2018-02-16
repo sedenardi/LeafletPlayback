@@ -868,15 +868,15 @@ L.Playback.PlayControl = L.Control.extend({
             if (playback.isPlaying()) {
                 playback.stop();
                 self._button.innerHTML = 'Play';
-                if (this.playback.onStop) {
-                  this.playback.onStop();
+                if (this.playback.options.onStop) {
+                  this.playback.options.onStop();
                 }
             }
             else {
                 playback.start();
                 self._button.innerHTML = 'Stop';
-                if (this.playback.onStart) {
-                  this.playback.onStart();
+                if (this.playback.options.onStart) {
+                  this.playback.options.onStart();
                 }
             }
         }
